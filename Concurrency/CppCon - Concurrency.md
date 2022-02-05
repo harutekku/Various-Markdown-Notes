@@ -456,4 +456,4 @@ int32_t res = f1.get();
   - [Back to Basics: Concurrency - Arthur O'Dwyer - CppCon 2020](https://www.youtube.com/watch?v=F6Ipn7gCOsY)
 
 # Author
-- Harutekku
+- [Harutekku](https://github.com/harutekku)

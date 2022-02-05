@@ -257,4 +257,4 @@ auto PushFront(int value) -> void {
   - [CppCon 2017: Fedor Pikus “C++ atomics, from basic to advanced. What do they really do?”](https://www.youtube.com/watch?v=ZQFzMfHIxng)
 
 # Author
-- Harutekku
+- [Harutekku](https://github.com/harutekku)

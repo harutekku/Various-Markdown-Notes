@@ -873,4 +873,4 @@ $\displaystyle D_{64} = (-1)^{S} \cdot 2^{E - B} \cdot \left ( 1 + \frac{1+F}{2^
 - Intel - "_[Intel 64 and IA-32 Architectures Software Developer's Manual](https://www.intel.com/content/dam/www/public/us/en/documents/manuals/64-ia-32-architectures-software-developer-instruction-set-reference-manual-325383.pdf)_"
 
 # Author
-- Harutekku
+- [Harutekku](https://github.com/harutekku)
