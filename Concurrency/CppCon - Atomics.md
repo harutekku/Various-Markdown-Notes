@@ -15,7 +15,7 @@
   - [Atomics vs Lock-free](#Atomics-vs-Lock-free)
   - [Waiting](#Waiting)
   - [Memory Guarantees](#Memory-Guarantees)
-    - [Memorry Barriers](#Memory-Barriers)
+    - [Memory Barriers](#Memory-Barriers)
     - [C++ Standard](#C++-Standard)
   - [Purpose](#Purpose)
 - [Use cases](#Use-cases)
@@ -33,9 +33,9 @@
 # Read-Modify-Write
   - How it works
     - The data - the entire cache line, not just a single variable - is fetched from the memory
-    - It propagates throught the cache lines - the CPU interacts directly with L1 cache line
+    - It propagates through the cache lines - the CPU interacts directly with L1 cache line
     - It's operated on by CPU
-    - It dwindles throught the cache lines into the main memory
+    - It dwindles through the cache lines into the main memory
   - Reads and writes do not have to be atomic
     - They're for built-in types on x86 architecture
 
@@ -44,7 +44,7 @@
 ## `std::atomic<T>`
   - A class-wrapper around certain types providing them with atomic operations
     - Introduced in C++11
-  - During the operation, a execution core gets exclusive access to the memory
+  - During the operation, an execution core gets exclusive access to the memory
   - A core accessing atomic memory is guaranteed _not to_ see the intermediate state
     - That is, as long as any other core does atomics!
 
@@ -62,18 +62,18 @@
 
 ### Special atomic operations
   - Increment and decrement for raw pointers
-  - Addition, substraction and bitwise logic operations for integral types
+  - Addition, subtraction and bitwise logic operations for integral types
   - `std::atomic<bool>` is valid, but doesn't have any special operations
   - `std::atomic<double>` is valid, no special operations and no atomic increment
   - Explicit reads and writes
     - `load()` gets a value atomically
     - `store()` stores a value atomically
   - Value exchange
-    - `exchange()` gets an old value, stores a new value and returs the old value
+    - `exchange()` gets an old value, stores a new value and returns the old value
   - Compare and swap
     - `compare_exchange_strong()` takes an expected value and desired value as arguments
       - If the value is not the expected value, it returns false and assigns current value to the first parameter.
-      - Otherwise sets the new value and returns true.
+      - Otherwise, sets the new value and returns true.
         ```cpp
         // Possible implementation - pseudocode
         auto compare_exchange_strong(T& oldValue, T newValue) -> bool {
@@ -94,7 +94,7 @@
         ```
     - `compare_exchange_weak()` takes an expected value and desired value as argument
       - If the value is not the expected value, it returns false and assigns current value to the first parameter.
-      - Otherwise _tries_ to set the new value and returns true.
+      - Otherwise, _tries_ to set the new value and returns true.
       - Can **spuriously** fail if the lock has timed out
         ```cpp
         auto compare_exchange_weak(T& oldValue, T newValue) -> bool {
@@ -127,16 +127,16 @@ while (!x.compare_exchange_strong(currentX, x * 2));
 ```
   - Fetch
     - `fetch_add()` adds atomically and returns the old value
-    - `fetch_subs()` substracts atomically and returns the old value
+    - `fetch_subs()` subtracts atomically and returns the old value
     - `fetch_and()` bitwise ANDs and returns the old value
     - `fetch_or()` bitwise ORs and returns the old value
     - `fetch_xor()` bitwise XORs and returns the old value
 
 ### Overloaded operators vs methods
   - As a programmer you speak to two audiences - machines and other programmers
-    - The compilers always understand what you mean. It's not necessarily what you meant to say
+    - The compilers always understand what you mean. It's not necessarily what you meant to say,
       but they always understand what you actually said
-    - Programmmers tend to see what they thought you meant, not what you really meant
+    - Programmers tend to see what they thought you meant, not what you really meant
   - Overloaded operators
     - Make writing code easier and faster
     - But are more prone to errors
@@ -188,7 +188,7 @@ while (!x.compare_exchange_strong(currentX, x * 2));
 
 ### Memory Barriers
   - Memory barriers control how changes to memory made by one CPU become visible to other CPUs
-    - It's a global control, accross all CPUs, provided by the hardware
+    - It's a global control, across all CPUs, provided by the hardware
     - Memory barriers are invoked through processor-specific instructions,
       although it's usually just an attribute to R/W instruction
   - Memory barriers are expensive - may be even more than atomic operations
@@ -203,17 +203,17 @@ while (!x.compare_exchange_strong(currentX, x * 2));
       the program order become visible after barrier. Operations can not be reordered.
     - `std::memory_order_release` guarantees that all memory operations scheduled before the barrier in
       the program order become visible before barrier. Operations can not be reordered.
-    - `std::memory_order_acq_rel` combines acquire amd release barriers. No operation can move
-      accross the barrier.
+    - `std::memory_order_acq_rel` combines acquire and release barriers. No operation can move
+      across the barrier.
     - `std::memory_order_seq_cst` removes the requirement and establishes single total modification
       order of atomic variables
-  - Sequential consistency is enforced by default as a strictest memory order. 
+  - Sequential consistency is enforced by default as the strictest memory order. 
     C++ guards you from mistakes, but it's not always necessary.
   - Releaser - Acquirer pattern
 
 ## Purpose
   - Atomic variables are hardly ever used by themselves
-  - Usefull for implementing data structures that are hard to implement with locks
+  - Useful for implementing data structures that are hard to implement with locks
   - Atomics are used to get exclusive access to memory
   - Atomics are used to reveal memory to other threads
 

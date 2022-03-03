@@ -117,7 +117,7 @@ printf("i: %d\n", result);
 ## Data races
   - A data race is a memory error occurring when two or more threads try to access the same memory location at the same time
     and at least one of these accesses is an attempt to write.
-  - Data races on any type is an undefined behaviour.
+  - Data races on any type is an undefined behavior.
   - Example
 
 ```cpp
@@ -198,7 +198,7 @@ t.join();
 puts("Thread main");
 ```
 
-  - There are several problem with the above example
+  - There are several problems with the above example
     - Thread `t` is wasting CPU cycles. It never goes to sleep, it atomically loads the value from `ready` variable,
       checks it and does a jump.
     - Theoretically, the compiler can see that if this thread never sleeps then the value of `ready` will never change and
@@ -211,9 +211,9 @@ puts("Thread main");
 
 ## `std::mutex`
   - Mutex is a mutual exclusion mechanism
-  - Mutex allows the current thread of execution to gain an exclusive access to the unique resource
+  - Mutex allows the current thread of execution to gain exclusive access to the unique resource
     - `lock()` method acquires the unique resource
-    - `unlock()` method releases the unique resurce
+    - `unlock()` method releases the unique resource
   - A `std::mutex` is a resource - it must be `unlock()`ed once you're done with it
 
 ```cpp
@@ -289,14 +289,14 @@ auto NumberPool::NumbersAvailable() const -> size_t {
 ```
 
 ## `std::unique_lock<T>`
-  - Analogue of `std::unique_ptr<T>` that helps with the management of the unique ownerships of `std::mutex` locks
+  - Analogue of `std::unique_ptr<T>` that helps with the management of the unique ownership of `std::mutex` locks
   - Just like `std::unique_ptr<T>`, `std::unique_lock<T>` is movable but not copyable
 
 ## `std::scoped_lock<T...>`
   - The new and improved `std::lock_guard<T>`, parametrized on multiple mutexes
   - Internally, it uses an algorithm based on address sorting to determine the order of locking the mutexes
   - Introduced to solve deadlock issues
-  - Rarely used, but usefull when needed
+  - Rarely used, but useful when needed
 
 ```cpp
 auto NumberPool::NumbersAvailable() const -> size_t {
@@ -317,7 +317,7 @@ auto NumberPool::MergeNumbersFrom(NumberPool& rhs) -> void {
     - `notify_one()` notifies one waiting thread
     - `notify_all()` notifies all waiting threads
     - `wait()` puts thread into the sleep
-  - Internally, `wait()` will relinguish the lock and go to sleep. Once it the thread wakes up,
+  - Internally, `wait()` will relinquish the lock and go to sleep. Once the thread wakes up,
     it'll re-acquire the lock.
   - It's all atomic
 
@@ -441,7 +441,7 @@ t.join();
 
 ## `std::future<T>` and `std::async()`
   - `std::async` starts a new thread, executes a callable and immediately returns a `std::promise`
-  - `std::future<T>::get()` blocks untill thread finishes
+  - `std::future<T>::get()` blocks until thread finishes
   - Internally, it's implemented with `std::mutex` and `std::condition_variable`
 
 ```cpp

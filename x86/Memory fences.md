@@ -41,7 +41,7 @@ void _mm_mfence(void);
 ```x86asm
 mfence
 ```
-- An Intel intrinsic/x86 SSE2 instruction that guarantees that every memory access that preceds, 
+- An Intel intrinsic/x86 SSE2 instruction that guarantees that every memory access that precedes, 
   in program order, the memory fence instruction is globally visible before any memory instruction 
   which follows the fence in program order
 

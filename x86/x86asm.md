@@ -40,8 +40,8 @@
     - [Example of avoiding branching](#Example-of-avoiding-branching)
   - [Endianness](#Endianness)
   - [Counting bits](#Counting-bits)
-    - [Aproach I](#Aproach-I)
-    - [Aproach II](#Aproach-II)
+    - [Approach I](#Aproach-I)
+    - [Approach II](#Aproach-II)
     - [Approach III](#Approach-III)
     - [Approach IV](#Approach-IV)
 - [Chapter IV](#Chapter-IV)
@@ -193,7 +193,7 @@ Sections of memory in terms of size
   - Where $selector$ is stored in segment register
 - Disadvantages of segmented addresses
   - A single selector can only reference 64K of memory. When more is needed, the program must be split into segments
-  - There's no unique segmented address for each byte
+  - There's no unique, segmented address for each byte
 
 ### 16-bit Protected Mode
 - Guarantees memory protection
@@ -221,7 +221,7 @@ Sections of memory in terms of size
 ## ASSembly
 - _ASSembler_ is a program that reads a text file with assembly instructions and converts the assembly into machine code
 - Every assembly instruction is an equivalent of a single machine instruction
-- Different architectures have different assembly languages (i.e AMD64 and ARMv7, etc.)
+- Different architectures have different assembly languages (i.e. AMD64 and ARMv7, etc.)
 
 ### Instruction operands
 | Type       | Explanation                                                                                                          |
@@ -277,14 +277,14 @@ Sections of memory in terms of size
 - The first bit is the sign bit
 - The remaining bits are used for storing the actual number
 - This approach presents several drawbacks
-  - There are two valid representations of zero, i.e `1000000` and `00000000`
+  - There are two valid representations of zero, i.e. `1000000` and `00000000`
   - Arithmetic logic is complicated
 
 ### One's complement
 - The first bit is the sign bit
 - The remaining bits are logically negated bits of the old number
 - There's one drawback
-  - Again, there exist two valid values of zero, i.e `10000000` and `00000000`
+  - Again, there exist two valid values of zero, i.e. `10000000` and `00000000`
 - A handy note:
   - To find one's complement of a hex number, simply subtract each digit from `0xF`
 
@@ -329,7 +329,7 @@ and the bit past the last removed bit must have the same value as the removed bi
 | `imul dest,src1,src2` | Multiply signed `src1` by `src2` and store the result in `dest`                                         |
 | `div src`             | Divide unsigned `rdx:rax` by `src` and store the quotient in `rax` and the remainder in `rdx`           |
 | `idiv src`            | Divide signed `rdx:rax` by `src` and store the quotient in `rax` and the remainder in `rdx`             |
-| `neg src`             | Negate `src` by computing it's two's complement                                                         |
+| `neg src`             | Negate `src` by computing its two's complement                                                          |
 | `clc`                 | Clear carry flag (`CF`)                                                                                 |
 
 - A common bug is to forget to initialize `rdx` (or `edx`, `dx`) before division
@@ -393,10 +393,10 @@ and the bit past the last removed bit must have the same value as the removed bi
 
 | Instruction signature | Description                                                                                             |
 |-----------------------|---------------------------------------------------------------------------------------------------------|
-| `shl dest,src`        | Logically shift left value in `dest` by `src` and store the result in `dest`. Adds zeros to the left    |
-| `shr dest,src`        | Logically shift right value in `dest` by `src` and store the result in `dest`. Adds zeros to the right  |
-| `shl dest,src`        | Arithmetically shift left value in `dest` by `src` and store the result in `dest`. Adds zeros           |
-| `sar dest,src`        | Arithmetically shift right value in `dest` by `src` and store the result in `dest`. Adds sign bits      |
+| `shl dest,src`        | Logically shift left value in `dest` by `src` and store the result in `dest`. Add zeros to the left     |
+| `shr dest,src`        | Logically shift right value in `dest` by `src` and store the result in `dest`. Add zeros to the right   |
+| `shl dest,src`        | Arithmetically shift left value in `dest` by `src` and store the result in `dest`. Add zeros            |
+| `sar dest,src`        | Arithmetically shift right value in `dest` by `src` and store the result in `dest`. Add sign bits       |
 | `rol dest,src`        | Rotate left value in `dest` by `src` and store the result in `dest`. Adds popped bits to the right      |
 | `ror dest,src`        | Rotate right value in `dest` by `src` and store the result in `dest`. Adds popped bits to the left      |
 | `rcl dest,src`        | Rotate left value in `dest` and carry by `src` and store the result in `dest`                           |
@@ -429,7 +429,7 @@ and the bit past the last removed bit must have the same value as the removed bi
 
 | Instruction signature | Description                                                                                             |
 |-----------------------|---------------------------------------------------------------------------------------------------------|
-| `set__ dest`          | Set `dest` to 1 if a condition is met; zero otherwise. The two letter code `__` is the same as for jumps|
+| `set__ dest`          | Set `dest` to 1 if a condition is met; zero otherwise. The two-letter code `__` is the same as for jumps|
 
 ### Example of avoiding branching
 The C code finding the bigger of two numbers
@@ -440,7 +440,7 @@ if (first < second)
 else
     max = first;
 ```
-can be rewritten without an `if`-clause as
+can be rewritten without a `if`-clause as
 ```x86asm
 mov rax,[second]  ; rax = *second
 xor rbx,rbx       ; rbx = 0
@@ -462,10 +462,10 @@ or rcx,rbx        ; rcx = rcx | rbx
 - You usually don't have to care because there's no way to inspect bits stored internally by the CPU, except when
   - Transferring data between devices with different endianness, such as PowerPC and x86
   - Dealing with UTF-16 and UTF-32 (UTF-8 doesn't have this problem)
-  - When reading and writing raw bytes between memory and some multibyte data structure (i.e interpreting JVM `.class` files)
+  - When reading and writing raw bytes between memory and some multibyte data structure (i.e. interpreting JVM `.class` files)
 
 ## Counting bits
-### Aproach I
+### Approach I
 ```x86asm
 mov rax,[data]
 mov rcx,64
@@ -476,7 +476,7 @@ while_label:
     loop while_label
 ```
 
-### Aproach II
+### Approach II
 ```C
 int32_t count = 0;
 while (data != 0) {
@@ -522,7 +522,7 @@ popcnt rax,[data]
 # Chapter IV
 
 ## Indirect addressing
-- General purpose registers can be used as "pointers", i.e they can be dereferenced with `[]` operator
+- General purpose registers can be used as "pointers", i.e. they can be dereferenced with `[]` operator
 
 ## Subprograms
 - A subprogram is an independent, _reusable_ unit of code than can be used from different parts of the program
@@ -606,7 +606,7 @@ subprogram:
 
 ### Symbols
 - Function labels can't have an underscore as the first character on x86-64 Linux
-  - On windows, function labels are prepended with the underscore
+  - On Windows, function labels are prepended with the underscore
 
 ### Parameters
 - Function parameters are passed in the `rdi`, `rsi`, `rdx`, `rcx`, `r8` and `r9`. Next parameters are passed on the stack in reverse order
@@ -621,10 +621,10 @@ subprogram:
 ### Returning values
 - Return values are stored in `rax` register. Otherwise, if it's 128-bit value, the upper 64 bits are stored in `rdx`. 
   Pointer values are stored in `rax` and floating-point values are stored in the `st0` register used by a math coprocessor
-  - In 16/32-bit mode rules are exactly the same, but for 16/32-bit registers with the exception of math coprocessor (it just uses `st0`)
+  - In 16/32-bit mode rules are exactly the same, but for 16/32-bit registers except for the math coprocessor (it just uses `st0`)
 
 ## Other calling conventions
-- A calling convention can be specified in GNU GCC as an `__attribute__`
+- A calling convention can be specified in GNU GCC as a `__attribute__`
   - Under Microsoft compilers, you can use `__cdecl`, `__stdcall` and some other compiler intrinsics
 
 | Calling convention     | Description                                     |
@@ -657,13 +657,13 @@ The formula is:
 $[base\_reg + factor \cdot index\_reg + constant]$
 
 Where:
-- $base\_reg$ is one of the general purpose registers, i.e `rax`, `rbx`, `rcx`, `rdx`, `rsp`, `rbp`, `rsi` or `rdi`
+- $base\_reg$ is one of the general purpose registers, i.e. `rax`, `rbx`, `rcx`, `rdx`, `rsp`, `rbp`, `rsi` or `rdi`
 - $factor$ is either 1, 2, 4 or 8
-- $index\_reg$ is one of the general purpose registers, i.e `rax`, `rbx`, `rcx`, `rdx`, `rbp`, `rsi` or `rdi`
+- $index\_reg$ is one of the general purpose registers, i.e. `rax`, `rbx`, `rcx`, `rdx`, `rbp`, `rsi` or `rdi`
 - $constant$ is a 32-bit constant or a label
 
 ## Multidimensional arrays
-- In _rowwise_ representation, multidimensional arrays are laid out flat in th memory; they're vectorized
+- In _row-wise_ representation, multidimensional arrays are laid out flat in the memory; they're vectorized
 - The position of the element denoted by indices $i_{1}$ to $i_{n}$ in the multidimensional array is
 
 $\displaystyle \sum_{j=1}^{n} \left ( \prod_{k=j+1}^{n} D_{k} \right ) i_{j}$
@@ -750,7 +750,7 @@ $\displaystyle D_{64} = (-1)^{S} \cdot 2^{E - B} \cdot \left ( 1 + \frac{1+F}{2^
 | $E=0$           | $F=0$    | Denotes the number zero, either positive or negative |
 | $E=0$           | $F\neq0$ | Denotes a denormalized number                        |
 | $E=\text{0xFF}$ | $F=0$    | Denotes infinity, either positive or negative        |
-| $E=\text{0xFF}$ | $F\neq0$ | Denots Not-a-Number (NaN) value                      |
+| $E=\text{0xFF}$ | $F\neq0$ | Denotes Not-a-Number (NaN) value                     |
 
 ### Issues
 - Floating-point calculations result in the _approximate_ result
@@ -862,7 +862,7 @@ $\displaystyle D_{64} = (-1)^{S} \cdot 2^{E - B} \cdot \left ( 1 + \frac{1+F}{2^
 
 | Instruction signature | Description                                                                                             |
 |-----------------------|---------------------------------------------------------------------------------------------------------|
-| `cpuid`               | Put informations about CPU into the general-purpose registers basing on values in `rax` and `rcx`       |
+| `cpuid`               | Put information about CPU into the general-purpose registers basing on values in `rax` and `rcx`        |
 | `popcnt dest,src`     | Count set bits in `src` and store the value in `rax`. Introduced _alongside_ SSE4a                      |
 | `emms`                | Empty MMX state; quit MMX                                                                               |
 | `nop`                 | Do nothing and be happy                                                                                 |
