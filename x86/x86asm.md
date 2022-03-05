@@ -410,7 +410,7 @@ and the bit past the last removed bit must have the same value as the removed bi
 | `or dest,src`         | Bitwise OR `dest` with `src` and store the value in `dest`                                              |
 | `xor dest,src`        | Bitwise XOR `dest` with `src` and store the value in `dest`                                             |
 | `not dest,src`        | Bitwise NOT `dest` with `src` and store the value in `dest`                                             |
-| `test src,dest`       | Bitwise AND `dest` with `src` and set the `SF`, `ZF` and `PF` flags accordingly                         |
+| `test dest,src`       | Bitwise AND `dest` with `src` and set the `SF`, `ZF` and `PF` flags accordingly                         |
 
 ## Uses of bitwise operations
 
