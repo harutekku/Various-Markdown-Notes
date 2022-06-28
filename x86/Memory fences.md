@@ -31,7 +31,7 @@ mov rax,[y]
 mov [y],1
 mov rbx,[x]
 ```
-- Because of hardware reordering, `cmp rax,rbx` can set `ZF` not necessarily because of the OOO
+- Because of hardware reordering, `cmp rax,rbx` can set `ZF` not necessarily because `rax` and `rbx` both contain 1
 
 ### Fixes
 ```C
