@@ -11,7 +11,7 @@
   - Program ordering - Stores and loads are issued on the system bus in order they occur in the instruction
     stream under all circumstances
   - Processor ordering - Allows performance enhancing operations such as allowing loads to go ahead
-    of buffered stores. The goal is to increase instruction execution speeds, while maintaining memory coherency
+    of buffered stores. The goal is to increase instruction execution speed, while maintaining memory coherency
 
 ### Rules
 - Loads are not reordered with other loads
