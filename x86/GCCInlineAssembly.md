@@ -6,20 +6,20 @@
 
 ## Syntax
 ### AT&T syntax
-- An alternative assembly syntax to Intel one
+- An alternative assembly syntax to the Intel one
 - Used by GNU `as` and inline assembly, since inline assembly is passed directly to the `as` for evaluation
 - Rules
   - `<opcode> src, dest` instead of `<opcode> dest, src`
-  - Register are prefixed with `%`, i.e. `%rax`, `%eip` or `%ax`
+  - Registers are prefixed with `%`, i.e. `%rax`, `%eip` or `%ax`
   - Immediate operands are prefixed with `$` and there's no `h` suffix for hexadecimal numbers, i.e. `$0x1` is valid while `1h` is not
   - Operand size is determined by instruction suffix, i.e. `b`, `w`, `l` and `ll` stand for byte, word, dword and qword
   - Addresses are referenced by the `section:offset(base_reg, index_reg, factor)`
     instead of `section:[base_reg + factor * index_reg + offset]`. `offset` and `factor` shouldn't be prefixed with `$`
-- You can change syntax to Intel one using `.intel_syntax`, but you must remember to switch back to AT&T syntax using `.att_syntax`
-  - You can also pass a `-masm=intel` flag to switch to Intel syntax entirely and forget about AT&T
+- You can change syntax to the Intel one using `.intel_syntax`, but you must remember to switch back to AT&T syntax using `.att_syntax`
+  - You can also pass a `-masm=intel` flag to switch to the Intel syntax entirely and forget about AT&T
 
 ### Basic syntax
-- Both `asm` and `__asm__` syntaxes are allowed
+- Both `asm` and `__asm__` keywords are allowed
 - After both forms you can place a `volatile` keyword to prevent **compiler** optimizations
   - This doesn't prevent instruction rearrangements and OOO execution
 - Between parentheses, you place instructions inside strings terminated with `\n`
@@ -32,7 +32,7 @@ __asm__ volatile (/*Instructions*/);
 
 ### Extended syntax
 - Since compiler has no idea what you put inside `__asm__` macro, you may clobber some registers you aren't supposed to
-- You can prevent this by letting compiler know what exact registers you're using plus what variables you're referencing
+- You can prevent this by letting compiler know which exact registers you're using plus which variables you're referencing
 
 ```C
 __asm__ (
@@ -76,7 +76,7 @@ __asm__ (
 | Modifier | Description                                                                                |
 |----------|--------------------------------------------------------------------------------------------|
 | `=`      | Treat operand as write-only                                                                |
-| `&`      | Treat operand as early-clobbered operand, which is modified before instruction is finished |
+| `&`      | Treat operand as early-clobbered operand, that is modified before instruction is finished  |
 
 # Credits
 - Sandeep S. - "_[GCC-Inline-Assembly-HOWTO](https://www.ibiblio.org/gferg/ldp/GCC-Inline-Assembly-HOWTO.html)_"
