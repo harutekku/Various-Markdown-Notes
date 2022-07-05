@@ -99,4 +99,4 @@
 
 # Author
 
-[Harutekku](https://github.com/harutekku)
+- [Harutekku](https://github.com/harutekku)
